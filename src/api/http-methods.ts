@@ -1,4 +1,4 @@
-import {Headers, Pet} from "./types";
+import {Headers, Pet, statusBody} from "./types";
 
 export class HttpMethods {
     // Добавление питомца
@@ -45,8 +45,11 @@ export class HttpMethods {
     }
 
     // Изменение статуса
-    static async postPetStatus(url: string, headers: Headers): Promise<Response> {
-        const response: Response = await fetch(url, {headers: headers})
+    static async postPetStatus(url: string, headers: Headers, body: statusBody): Promise<Response> {
+        const response: Response = await fetch(url, {
+            headers: headers,
+            body: JSON.stringify(body),
+        })
 
         if (!response.ok) {
             console.error(response.statusText, response.statusText)

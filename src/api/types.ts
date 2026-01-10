@@ -21,3 +21,7 @@ export interface Pet {
 
 export type Headers = Record<string, string>;
 
+export interface statusBody {
+    status: string;
+}
+
