@@ -10,10 +10,10 @@ const DELETE_RESOURCE: string = "/pet/";
 
 
 export class PetStoreAPI {
-    static async addPet(): Promise<Response> {
+    static async addPet(petId: number): Promise<Response> {
         const url: string = `${BASE_URL}${POST_RESOURCE}`;
         const body: Pet = {
-            "id": 110,
+            "id": petId,
             "category": {
                 "id": 0,
                 "name": "string"
@@ -41,10 +41,10 @@ export class PetStoreAPI {
         return response
     }
 
-    static async putPet(): Promise<Response> {
+    static async putPet(petId: number): Promise<Response> {
         const url: string = `${BASE_URL}${PUT_RESOURCE}`;
         const body: Pet = {
-            "id": 110,
+            "id": petId,
             "category": {
                 "id": 0,
                 "name": "string"
@@ -71,8 +71,8 @@ export class PetStoreAPI {
         return response
     }
 
-    static async findPetById(): Promise<Response> {
-        const url: string = `${BASE_URL}${GET_RESOURCE}`;
+    static async findPetById(petId: number): Promise<Response> {
+        const url: string = `${BASE_URL}${GET_RESOURCE}/${petId}`;
         const headers: Headers = {
             accept: "application/json",
         }
@@ -82,8 +82,8 @@ export class PetStoreAPI {
         return response;
     }
 
-    static async changePetStatus(): Promise<Response> {
-        const url: string = `${BASE_URL}${POST_RESOURCE}/110`;
+    static async changePetStatus(petId: number): Promise<Response> {
+        const url: string = `${BASE_URL}${POST_RESOURCE}/${petId}`;
         const headers: Headers = {
             "accept": "application/json",
             "Content-Type": "application/x-www-form-urlencoded",
@@ -97,8 +97,8 @@ export class PetStoreAPI {
         return response;
     }
 
-    static async deletePetById(): Promise<Response> {
-        const url: string = `${BASE_URL}${DELETE_RESOURCE}/110`;
+    static async deletePetById(petId: number): Promise<Response> {
+        const url: string = `${BASE_URL}${DELETE_RESOURCE}/${petId}}`;
         const headers: Headers = {
             accept: "application/json",
             "api_key": "special-key",
