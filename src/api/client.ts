@@ -4,9 +4,9 @@ import {HttpMethods} from "./http-methods";
 
 const BASE_URL: string = "https://petstore.swagger.io/v2";
 const POST_RESOURCE: string = "/pet";
-const GET_RESOURCE: string = "/pet/findByStatus";
+const GET_RESOURCE: string = "/pet";
 const PUT_RESOURCE: string = "/pet";
-const DELETE_RESOURCE: string = "/pet/";
+const DELETE_RESOURCE: string = "/pet";
 
 
 export class PetStoreAPI {
@@ -28,7 +28,7 @@ export class PetStoreAPI {
                     "name": "string"
                 }
             ],
-            "status": "available"
+            "status": "sold"
         }
 
         const headers: Headers = {

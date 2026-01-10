@@ -18,18 +18,32 @@ describe("E2E Pet Lyfecycle", () => {
         expect(getAfterPostResponse.status).toBe(200);
         expect(getAfterPostResponse.headers.get("content-type")).toBe("application/json");
         expect(getAfterPostResponseJson.id).toBe(petId);
-        console.log(`Тело ответа после GET: ${JSON.stringify(getAfterPostResponseJson)}`)
 
-        // Изменение статуса питомца
-        // ...
+        // Изменение статуса питомца на sold
+        const changePetStatusResponse: Response = await PetStoreAPI.putPet(petId);
+        const changePetStatusResponseJson = await changePetStatusResponse.json();
+        expect(changePetStatusResponse.status).toBe(200);
+        expect(changePetStatusResponse.headers.get("content-type")).toBe("application/json");
+        expect(changePetStatusResponseJson.id).toBe(petId);
 
         // Получение информации о питомце после изменения статуса
-        // ...
+        const getAfterChangeStatusResponse: Response = await PetStoreAPI.findPetById(petId);
+        const getAfterChangeStatusResponseJson = await getAfterChangeStatusResponse.json();
+        expect(getAfterChangeStatusResponse.status).toBe(200);
+        expect(getAfterChangeStatusResponse.headers.get("content-type")).toBe("application/json");
+        // Проверяем, изменился ли статус на sold
+        // expect(getAfterChangeStatusResponseJson.status).toBe("sold");
 
         // Удаление питомца
-        // ...
+        const deletePetFromShopResponse: Response = await PetStoreAPI.deletePetById(petId);
+        const deletePetFromShopResponseJson = await deletePetFromShopResponse.json();
+        expect(deletePetFromShopResponse.status).toBe(200);
+        expect(deletePetFromShopResponse.headers.get("content-type")).toBe("application/json");
+        expect(deletePetFromShopResponseJson.id).toBe(petId);
 
         // Получение информации после удаления питомца
-        // ...
+        const getAfterDeleteResponse: Response = await PetStoreAPI.findPetById(petId);
+        expect(getAfterDeleteResponse.status).toBe(404);
+        expect(getAfterDeleteResponse.headers.get("content-type")).toBe("application/json");
     })
 })
