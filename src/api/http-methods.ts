@@ -2,7 +2,7 @@ import {Headers, Pet} from "./types";
 
 export class HttpMethods {
     // Добавление питомца
-    static async postPet <T>(url: string, body: Pet, headers: Headers): Promise<T> {
+    static async postPet(url: string, body: Pet, headers: Headers): Promise<Response> {
         const response: Response = await fetch(url, {
             method: "POST",
             body: JSON.stringify(body),
@@ -10,14 +10,14 @@ export class HttpMethods {
         })
 
         if (!response.ok) {
-            console.error(response.statusText, response.statusText)
+            console.error(`HTTP Error: ${response.status} ${response.statusText}`)
         }
 
-        return await response.json() as Promise<T>;
+        return response;
     }
 
     // Изменение по ID
-    static async putPet <T>(url: string, body: Pet, headers: Headers): Promise<T> {
+    static async putPet (url: string, body: Pet, headers: Headers): Promise<Response> {
         const response: Response = await fetch(url, {
             method: "PUT",
             body: JSON.stringify(body),
@@ -28,11 +28,11 @@ export class HttpMethods {
             console.error(response.statusText, response.statusText)
         }
 
-        return await response.json() as Promise<T>;
+        return response;
     }
 
     // Получение по ID
-    static async getPet <T>(url: string, headers: Headers): Promise<T> {
+    static async getPet <T>(url: string, headers: Headers): Promise<Response> {
         const response: Response = await fetch(url, {
             method: "GET",
             headers: headers
@@ -41,17 +41,28 @@ export class HttpMethods {
         if (!response.ok) {
             console.error(response.statusText, response.statusText)
         }
-        return await response.json() as Promise<T>;
+        return response;
     }
 
     // Изменение статуса
-    static async postPetStatus<T>(url: string, headers: Headers): Promise<T> {
+    static async postPetStatus(url: string, headers: Headers): Promise<Response> {
         const response: Response = await fetch(url, {headers: headers})
 
         if (!response.ok) {
             console.error(response.statusText, response.statusText)
         }
 
-        return await response.json() as Promise<T>;
+        return response;
+    }
+
+    // Удаление питомца
+    static async deletePet (url: string, headers: Headers): Promise<Response> {
+        const response: Response = await fetch(url, {headers: headers})
+
+        if (!response.ok) {
+            console.error(response.statusText, response.statusText)
+        }
+
+        return response;
     }
 }
