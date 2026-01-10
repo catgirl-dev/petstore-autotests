@@ -10,7 +10,7 @@ const DELETE_RESOURCE: string = "/pet/";
 
 
 export class PetStoreAPI {
-    static async addPet(response: Response): Promise<Response> {
+    static async addPet(): Promise<Response> {
         const url: string = `${BASE_URL}${POST_RESOURCE}`;
         const body: Pet = {
             "id": 110,
@@ -36,12 +36,12 @@ export class PetStoreAPI {
             "Content-Type": "application/json",
         }
 
-        response = await HttpMethods.postPet(url, body, headers);
+        const response: Response =  await HttpMethods.postPet(url, body, headers);
 
         return response
     }
 
-    static async putPet(response: Response): Promise<Response> {
+    static async putPet(): Promise<Response> {
         const url: string = `${BASE_URL}${PUT_RESOURCE}`;
         const body: Pet = {
             "id": 110,
@@ -66,23 +66,23 @@ export class PetStoreAPI {
             "Content-Type": "application/json",
         }
 
-        response = await HttpMethods.putPet(url, body, headers);
+        const response: Response = await HttpMethods.putPet(url, body, headers);
 
         return response
     }
 
-    static async findPetById(response: Response): Promise<Response> {
+    static async findPetById(): Promise<Response> {
         const url: string = `${BASE_URL}${GET_RESOURCE}`;
         const headers: Headers = {
             accept: "application/json",
         }
 
-        response = await HttpMethods.getPet(url, headers);
+        const response = await HttpMethods.getPet(url, headers);
 
         return response;
     }
 
-    static async changePetStatus(response: Response): Promise<Response> {
+    static async changePetStatus(): Promise<Response> {
         const url: string = `${BASE_URL}${POST_RESOURCE}/110`;
         const headers: Headers = {
             "accept": "application/json",
@@ -92,19 +92,19 @@ export class PetStoreAPI {
             status: "available"
         }
 
-        response = await HttpMethods.postPetStatus(url, headers, body);
+        const response: Response = await HttpMethods.postPetStatus(url, headers, body);
 
         return response;
     }
 
-    static async deletePetById(response: Response): Promise<Response> {
+    static async deletePetById(): Promise<Response> {
         const url: string = `${BASE_URL}${DELETE_RESOURCE}/110`;
         const headers: Headers = {
             accept: "application/json",
             "api_key": "special-key",
         }
 
-        response = await HttpMethods.deletePet(url, headers);
+        const response: Response =  await HttpMethods.deletePet(url, headers);
 
         return response;
     }
