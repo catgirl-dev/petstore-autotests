@@ -60,7 +60,7 @@ export class HttpMethods {
 
     // Удаление питомца
     static async deletePet (url: string, headers: Headers): Promise<Response> {
-        const response: Response = await fetch(url, {headers: headers})
+        const response: Response = await fetch(url, {method: 'DELETE', headers: headers})
 
         if (!response.ok) {
             console.error(response.statusText, response.statusText)

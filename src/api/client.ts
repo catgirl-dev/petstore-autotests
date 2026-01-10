@@ -28,7 +28,7 @@ export class PetStoreAPI {
                     "name": "string"
                 }
             ],
-            "status": "sold"
+            "status": "available"
         }
 
         const headers: Headers = {
@@ -59,7 +59,7 @@ export class PetStoreAPI {
                     "name": "string"
                 }
             ],
-            "status": "available"
+            "status": "sold"
         }
         const headers: Headers = {
             accept: "application/json",
@@ -98,7 +98,7 @@ export class PetStoreAPI {
     }
 
     static async deletePetById(petId: number): Promise<Response> {
-        const url: string = `${BASE_URL}${DELETE_RESOURCE}/${petId}}`;
+        const url: string = `${BASE_URL}${DELETE_RESOURCE}/${petId}`;
         const headers: Headers = {
             accept: "application/json",
             "api_key": "special-key",

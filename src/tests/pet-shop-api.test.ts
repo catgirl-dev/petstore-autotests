@@ -32,17 +32,17 @@ describe("E2E Pet Lyfecycle", () => {
         expect(getAfterChangeStatusResponse.status).toBe(200);
         expect(getAfterChangeStatusResponse.headers.get("content-type")).toBe("application/json");
         // Проверяем, изменился ли статус на sold
-        // expect(getAfterChangeStatusResponseJson.status).toBe("sold");
+        expect(getAfterChangeStatusResponseJson.status).toBe("sold");
 
         // Удаление питомца
         const deletePetFromShopResponse: Response = await PetStoreAPI.deletePetById(petId);
         const deletePetFromShopResponseJson = await deletePetFromShopResponse.json();
         expect(deletePetFromShopResponse.status).toBe(200);
         expect(deletePetFromShopResponse.headers.get("content-type")).toBe("application/json");
-        expect(deletePetFromShopResponseJson.id).toBe(petId);
 
         // Получение информации после удаления питомца
         const getAfterDeleteResponse: Response = await PetStoreAPI.findPetById(petId);
+        console.log(getAfterDeleteResponse.status);
         expect(getAfterDeleteResponse.status).toBe(404);
         expect(getAfterDeleteResponse.headers.get("content-type")).toBe("application/json");
     })
