@@ -18,7 +18,7 @@ export class PetStoreAPI {
                 "id": 0,
                 "name": "string"
             },
-            "name": "Mur",
+            "name": "Murka",
             "photoUrls": [
                 "string"
             ],
@@ -49,7 +49,7 @@ export class PetStoreAPI {
                 "id": 0,
                 "name": "string"
             },
-            "name": "doggie",
+            "name": "Pushok",
             "photoUrls": [
                 "string"
             ],

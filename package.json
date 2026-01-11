@@ -5,9 +5,19 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "allure:generate": "npx allure generate allure-results --clean -o allure-report",
+    "allure:open": "npx allure open allure-report",
+    "test:with-report": "npm run test && npm run allure:generate && npm run allure:open"
   },
   "devDependencies": {
+    "@types/node": "^25.0.6",
+    "@vitest/ui": "^4.0.16",
+    "@vitest/runner": "^4.0.16",
+    "allure-commandline": "^2.29.0",
+    "allure-js-commons": "^3.4.4",
+    "allure-vitest": "^3.4.4",
     "typescript": "^5.5.3",
     "vitest": "^4.0.16"
   },
