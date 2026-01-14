@@ -1,9 +1,13 @@
 import { PetStoreAPI } from "../api/client";
 import { describe, it, expect } from "vitest";
 import { validateSchema } from "./checks";
-import petSchema from './schemas/pet.schema.json';
-import deletePetSchema from './schemas/delete-pet.schema.json';
+import petSchemaJson from './schemas/pet.schema.json';
+import deletePetSchemaJson from './schemas/delete-pet.schema.json';
+import {JSONSchemaType} from "ajv";
+import {DeletePetResponse, Pet} from "../api/types";
 
+const petSchema: JSONSchemaType<Pet> = petSchemaJson as JSONSchemaType<Pet>;
+const deletePetSchema: JSONSchemaType<DeletePetResponse> = deletePetSchemaJson as JSONSchemaType<DeletePetResponse>;
 
 const petId = 10;
 
@@ -19,23 +23,23 @@ declare const allure: {
 };
 
 
-describe("E2E Pet Lifecycle", () => {
+describe("E2E Жизненный цикл питомца в магазине", () => {
     it("Проверка жизненного цикла питомца в зоомагазине", async () => {
 
         if (!allure) {
-            throw new Error("Allure is not initialized. Check vitest.config.ts setupFiles.");
+            throw new Error("Аллюр не инициализирован. Настройте vitest.config.ts");
         }
 
-        allure.epic("Pet Store");
-        allure.feature("Pet Lifecycle");
+        allure.epic("Магазин питомцев");
+        allure.feature("Жизненный цикл питомца");
         allure.story("CRUD операции с питомцем");
         allure.severity("critical");
         allure.tag("e2e");
         allure.tag("pet");
 
         await allure.step("Добавление питомца", async () => {
-            const res = await PetStoreAPI.addPet(petId);
-            const json = await res.json();
+            const res: Response = await PetStoreAPI.addPet(petId);
+            const json: Pet = await res.json();
 
             allure.attachment("Response Body", JSON.stringify(json, null, 2), "application/json");
 
@@ -46,8 +50,8 @@ describe("E2E Pet Lifecycle", () => {
         });
 
         await allure.step("Получение информации после добавления", async () => {
-            const res = await PetStoreAPI.findPetById(petId);
-            const json = await res.json();
+            const res: Response = await PetStoreAPI.findPetById(petId);
+            const json: Pet = await res.json();
 
             allure.attachment("Response Body", JSON.stringify(json, null, 2), "application/json");
 
@@ -58,8 +62,8 @@ describe("E2E Pet Lifecycle", () => {
         });
 
         await allure.step("Изменение статуса на sold", async () => {
-            const res = await PetStoreAPI.putPet(petId);
-            const json = await res.json();
+            const res: Response = await PetStoreAPI.putPet(petId);
+            const json: Pet = await res.json();
 
             allure.attachment("Request Body", JSON.stringify({ status: "sold" }), "application/json");
             allure.attachment("Response Body", JSON.stringify(json, null, 2), "application/json");
@@ -71,8 +75,8 @@ describe("E2E Pet Lifecycle", () => {
         });
 
         await allure.step("Проверка нового статуса", async () => {
-            const res = await PetStoreAPI.findPetById(petId);
-            const json = await res.json();
+            const res: Response = await PetStoreAPI.findPetById(petId);
+            const json: Pet = await res.json();
 
             allure.attachment("Response Body", JSON.stringify(json, null, 2), "application/json");
 
@@ -81,9 +85,9 @@ describe("E2E Pet Lifecycle", () => {
             validateSchema(petSchema, json);
         });
 
-        await allure.step("Удаление питомца", async () => {
-            const res = await PetStoreAPI.deletePetById(petId);
-            const json = await res.json();
+        await allure.step("Удаление питомца из магазина", async () => {
+            const res: Response = await PetStoreAPI.deletePetById(petId);
+            const json: DeletePetResponse = await res.json();
 
             allure.attachment("Response Body", JSON.stringify(json, null, 2), "application/json");
 
@@ -92,8 +96,8 @@ describe("E2E Pet Lifecycle", () => {
             validateSchema(deletePetSchema, json);
         });
 
-        await allure.step("Проверка отсутствия питомца", async () => {
-            const res = await PetStoreAPI.findPetById(petId);
+        await allure.step("Проверка отсутствия питомца в магазине", async () => {
+            const res: Response = await PetStoreAPI.findPetById(petId);
 
             allure.attachment("Response Status", res.status.toString(), "text/plain");
 
