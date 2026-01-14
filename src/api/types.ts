@@ -1,3 +1,5 @@
+import {JSONSchemaType} from "ajv";
+
 export interface Category {
     id: number;
     name: string;
@@ -25,7 +27,8 @@ export interface DeletePetResponse {
     message: string;
 }
 
-export type ValidateJson = Pet | DeletePetResponse;
+export type ValidateSchemaType = JSONSchemaType<Pet> | JSONSchemaType<DeletePetResponse>;
+export type ValidateBodyType = Pet | DeletePetResponse;
 
 export type Headers = Record<string, string>;
 

@@ -1,9 +1,9 @@
 import Ajv, { JSONSchemaType, ValidateFunction } from "ajv";
-import {DeletePetResponse, Pet} from "../api/types";
+import {DeletePetResponse, Pet, ValidateBodyType, ValidateSchemaType} from "../api/types";
 
 const ajv = new Ajv({ allErrors: true });
 
-export const validateSchema = (schema: JSONSchemaType<Pet> | JSONSchemaType<DeletePetResponse>, responseJson: Pet | DeletePetResponse): void => {
+export const validateSchema = (schema: ValidateSchemaType, responseJson: ValidateBodyType): void => {
     const validate: ValidateFunction<unknown> = ajv.compile(schema);
 
     const valid: boolean = validate(responseJson);
