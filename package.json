@@ -13,13 +13,18 @@
   },
   "devDependencies": {
     "@types/node": "^25.0.6",
-    "@vitest/ui": "^4.0.16",
     "@vitest/runner": "^4.0.16",
+    "@vitest/ui": "^4.0.16",
     "allure-commandline": "^2.29.0",
     "allure-js-commons": "^3.4.4",
     "allure-vitest": "^3.4.4",
     "typescript": "^5.5.3",
     "vitest": "^4.0.16"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-errors": "^3.0.0",
+    "ajv-formats": "^3.0.1"
+  }
 }

@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pet",
+  "description": "Питомец в магазине",
+  "type": "object",
+  "required": ["id", "name", "photoUrls"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Уникальный идентификатор питомца",
+      "minimum": 0
+    },
+    "category": {
+      "type": "object",
+      "description": "Категория питомца",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Идентификатор категории",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string",
+          "description": "Название категории"
+        }
+      },
+      "required": ["id", "name"],
+      "additionalProperties": false
+    },
+    "name": {
+      "type": "string",
+      "description": "Кличка питомца"
+    },
+    "photoUrls": {
+      "type": "array",
+      "description": "Ссылки на фотографии",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "tags": {
+      "type": "array",
+      "description": "Теги питомца",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "name"],
+        "additionalProperties": false
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "Статус питомца в магазине",
+      "enum": ["available", "pending", "sold"]
+    }
+  },
+  "additionalProperties": false
+}

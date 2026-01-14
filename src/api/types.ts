@@ -19,6 +19,14 @@ export interface Pet {
     status: Status;
 }
 
+export interface DeletePetResponse {
+    code: number;
+    type: string;
+    message: string;
+}
+
+export type ValidateJson = Pet | DeletePetResponse;
+
 export type Headers = Record<string, string>;
 
 export interface statusBody {

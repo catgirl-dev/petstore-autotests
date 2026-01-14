@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DeletePetResponse",
+  "description": "Ответ на удаление питомца",
+  "type": "object",
+  "required": ["code", "type", "message"],
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "HTTP статус-код",
+      "minimum": 100,
+      "maximum": 599,
+      "enum": [200]
+    },
+    "type": {
+      "type": "string",
+      "description": "Тип ответа",
+      "pattern": "^[a-zA-Z]+$"
+    },
+    "message": {
+      "type": "string",
+      "description": "Сообщение с ID удаленного питомца",
+      "pattern": "^\\d+$"
+    }
+  },
+  "additionalProperties": false
+}
