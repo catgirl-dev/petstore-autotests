@@ -27,8 +27,8 @@ export interface DeletePetResponse {
     message: string;
 }
 
-export type ValidateSchemaType = JSONSchemaType<Pet> | JSONSchemaType<DeletePetResponse>;
-export type ValidateBodyType = Pet | DeletePetResponse;
+export type ValidateSchemaType<T> = JSONSchemaType<T>;
+export type ValidateBodyType<T> = T;
 
 export type Headers = Record<string, string>;
 
