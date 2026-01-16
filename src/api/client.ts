@@ -41,7 +41,7 @@ export class PetStoreAPI {
         return response
     }
 
-    static async putPet(petId: number): Promise<Response> {
+    static async putPet(petId: number, name: string): Promise<Response> {
         const url: string = `${BASE_URL}${PUT_RESOURCE}`;
         const body: Pet = {
             "id": petId,
@@ -49,7 +49,7 @@ export class PetStoreAPI {
                 "id": 0,
                 "name": "string"
             },
-            "name": "Pushok",
+            "name": name,
             "photoUrls": [
                 "string"
             ],

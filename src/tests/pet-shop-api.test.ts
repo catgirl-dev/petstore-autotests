@@ -10,6 +10,7 @@ const petSchema: JSONSchemaType<Pet> = petSchemaJson as JSONSchemaType<Pet>;
 const deletePetSchema: JSONSchemaType<DeletePetResponse> = deletePetSchemaJson as JSONSchemaType<DeletePetResponse>;
 
 const petId: number = 10;
+const petName: string = "Pushok";
 
 declare const allure: Allure;
 
@@ -51,8 +52,8 @@ describe("E2E Жизненный цикл питомца в магазине", (
             validateSchema(petSchema, json);
         });
 
-        await allure.step("Изменение статуса на sold", async () => {
-            const res: Response = await PetStoreAPI.putPet(petId);
+        await allure.step("Изменение статуса на \"sold\" и имени", async () => {
+            const res: Response = await PetStoreAPI.putPet(petId, petName);
             const json: Pet = await res.json();
 
             allure.attachment("Request Body", JSON.stringify({ status: "sold" }), "application/json");
@@ -64,13 +65,14 @@ describe("E2E Жизненный цикл питомца в магазине", (
             validateSchema(petSchema, json);
         });
 
-        await allure.step("Проверка нового статуса", async () => {
+        await allure.step("Проверка нового статуса и имени", async () => {
             const res: Response = await PetStoreAPI.findPetById(petId);
             const json: Pet = await res.json();
 
             allure.attachment("Response Body", JSON.stringify(json, null, 2), "application/json");
 
             expect(json.status).toBe("sold");
+            expect(json.name).toBe(petName)
 
             validateSchema(petSchema, json);
         });
