@@ -3,7 +3,9 @@ import { ValidateBodyType, ValidateSchemaType } from "../api/types";
 
 const ajv = new Ajv({ allErrors: true });
 
-export const validateSchema = <T>(schema: ValidateSchemaType<T>, responseJson: ValidateBodyType<T>): void => {
+export const validateSchema = <T>(
+    schema: ValidateSchemaType<T>,
+    responseJson: ValidateBodyType<T>): void => {
     const validate: ValidateFunction<T> = ajv.compile(schema);
 
     const valid: boolean = validate(responseJson);

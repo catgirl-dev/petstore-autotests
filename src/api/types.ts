@@ -1,4 +1,4 @@
-import {JSONSchemaType} from "ajv";
+import { JSONSchemaType } from "ajv";
 
 export interface Category {
     id: number;
@@ -36,3 +36,13 @@ export interface statusBody {
     status: string;
 }
 
+export interface Allure {
+    epic: (name: string) => void;
+    feature: (name: string) => void;
+    story: (name: string) => void;
+    severity: (name: string) => void;
+    tag: (name: string) => void;
+    step: <T>(name: string, fn: () => T | Promise<T>) => Promise<T>;
+    attachment: (name: string, content: string, type: string) => void;
+    parameter: (name: string, value: string) => void;
+}

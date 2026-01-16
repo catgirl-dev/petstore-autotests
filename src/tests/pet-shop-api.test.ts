@@ -4,24 +4,14 @@ import { validateSchema } from "./checks";
 import petSchemaJson from './schemas/pet.schema.json';
 import deletePetSchemaJson from './schemas/delete-pet.schema.json';
 import {JSONSchemaType} from "ajv";
-import {DeletePetResponse, Pet} from "../api/types";
+import {Allure, DeletePetResponse, Pet} from "../api/types";
 
 const petSchema: JSONSchemaType<Pet> = petSchemaJson as JSONSchemaType<Pet>;
 const deletePetSchema: JSONSchemaType<DeletePetResponse> = deletePetSchemaJson as JSONSchemaType<DeletePetResponse>;
 
-const petId = 10;
+const petId: number = 10;
 
-declare const allure: {
-    epic: (name: string) => void;
-    feature: (name: string) => void;
-    story: (name: string) => void;
-    severity: (name: string) => void;
-    tag: (name: string) => void;
-    step: <T>(name: string, fn: () => T | Promise<T>) => Promise<T>;
-    attachment: (name: string, content: string, type: string) => void;
-    parameter: (name: string, value: string) => void;
-};
-
+declare const allure: Allure;
 
 describe("E2E Жизненный цикл питомца в магазине", () => {
     it("Проверка жизненного цикла питомца в зоомагазине", async () => {
